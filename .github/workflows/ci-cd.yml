@@ -8,28 +8,41 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Set up JDK 18 with Adopt distribution
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: '18'
+
       - name: Set permissions for gradlew
         run: chmod +x demo/gradlew
+
       - name: Run unit tests
         run: |
           cd demo
-          ./gradlew test --tests *TestTask
+          ./gradlew test --tests *TestTask  # Presuming that TestTask is your unit test
 
   integration_tests:
-    needs: unit_tests
     runs-on: ubuntu-latest
+    needs: unit_tests
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Set up JDK 18 with Adopt distribution
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '18'
+
+      - name: Set permissions for gradlew
+        run: chmod +x demo/gradlew
+
       - name: Run integration tests
         run: |
           cd demo
-          ./gradlew test --tests *TestTaskController
+          ./gradlew test --tests *TestTaskController  # Presuming that TestTaskController is your integration test
 
   build_and_push:
     needs: integration_tests
@@ -37,12 +50,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
       - name: Login to GitHub Packages Docker registry
         run: echo "${{ secrets.DOCKER_PAT_TEST }}" | docker login docker.pkg.github.com -u d1mazik --password-stdin
+
       - name: Build Docker image
         run: |
           IMAGE_TAG=$(echo ${GITHUB_REF##*/} | tr '[:upper:]' '[:lower:]')
           docker build -t docker.pkg.github.com/d1mazik/to-do-list-grupp-7/min-app:$IMAGE_TAG -f Dockerfile .
+
       - name: Push Docker image to GitHub Packages
         run: |
           IMAGE_TAG=$(echo ${GITHUB_REF##*/} | tr '[:upper:]' '[:lower:]')

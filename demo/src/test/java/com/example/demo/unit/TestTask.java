@@ -1,4 +1,4 @@
-package unit;
+package com.example.demo.unit;
 
 import com.example.demo.Task;
 import org.junit.jupiter.api.Test;

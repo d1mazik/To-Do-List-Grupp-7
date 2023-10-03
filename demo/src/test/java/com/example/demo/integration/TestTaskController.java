@@ -1,4 +1,4 @@
-package integration;
+package com.example.demo.integration;
 
 import com.example.demo.Task;
 import com.example.demo.TaskController;
