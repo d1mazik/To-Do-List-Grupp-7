@@ -28,7 +28,6 @@ dependencies {
 	testImplementation ("org.springframework.boot:spring-boot-starter-test")
 	testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.0")
 	testImplementation ("org.junit.jupiter:junit-jupiter-engine:5.7.0")
-	testImplementation("com.github.marchof.gradle:junit5-xml-plugin:0.5.1")
 }
 
 tasks.named<Test>("test") {
