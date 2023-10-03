@@ -29,15 +29,12 @@ dependencies {
 }
 
 tasks.withType<Test> {
-	useJUnitPlatform()
-}
-
-tasks.named<Test>("test") {
-	// Use JUnit Platform for unit tests.
+	// Använd JUnit Platform
 	useJUnitPlatform()
 
-	// Add detailed test logging
+	// Lägg till detaljerad testloggning
 	testLogging {
 		events("passed", "skipped", "failed")
 	}
 }
+
