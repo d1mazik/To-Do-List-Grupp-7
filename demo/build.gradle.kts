@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.fusesource.jansi.AnsiRenderer.test
+
 plugins {
 	java
 	id("org.springframework.boot") version "3.1.4"
@@ -26,8 +28,16 @@ dependencies {
 	testImplementation ("org.springframework.boot:spring-boot-starter-test")
 	testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.0")
 	testImplementation ("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+	testImplementation("com.github.marchof.gradle:junit5-xml-plugin:0.5.1")
 }
 
-tasks.withType<Test> {
+tasks.named<Test>("test") {
+	// Use JUnit Platform for unit tests.
 	useJUnitPlatform()
+
+	// Add detailed test logging
+	testLogging {
+		events("passed", "skipped", "failed")
+	}
 }
+
