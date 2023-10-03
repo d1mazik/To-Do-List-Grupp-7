@@ -29,7 +29,7 @@ public class TestTask {
   public void testGetName(){
     Task task = new Task();
     task.setName("name");
-    assert(task.getName().equals("Name"));
+    assert(task.getName().equals("name"));
   }
 
   @Test
