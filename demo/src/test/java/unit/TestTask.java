@@ -1,5 +1,6 @@
-package com.example.demo;
+package unit;
 
+import com.example.demo.Task;
 import org.junit.jupiter.api.Test;
 
 public class TestTask {

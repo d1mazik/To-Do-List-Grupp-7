@@ -1,5 +1,8 @@
-package com.example.demo;
+package integration;
 
+import com.example.demo.Task;
+import com.example.demo.TaskController;
+import com.example.demo.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
