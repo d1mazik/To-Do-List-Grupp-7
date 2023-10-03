@@ -1,6 +1,12 @@
 name: CI/CD Pipeline
 
-on: [push]
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - Test
 
 jobs:
   unit_tests:
@@ -17,10 +23,9 @@ jobs:
           java-version: '18'
 
       - name: Set permissions for gradlew
-        run: |
-          chmod +x demo/gradlew
+        run: chmod +x demo/gradlew
 
-      - name: Build Java application
+      - name: Build Java application and Run Tests
         run: |
           cd demo
           ./gradlew build
@@ -58,3 +63,4 @@ jobs:
         run: |
           IMAGE_TAG=$(echo ${GITHUB_REF##*/} | tr '[:upper:]' '[:lower:]')
           echo "Deploying image docker.pkg.github.com/d1mazik/to-do-list-grupp-7/min-app:$IMAGE_TAG"
+
